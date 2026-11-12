@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patient Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Patient_registration.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="javascript:history.back()">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+
+    <section class="card" aria-labelledby="form-title">
+      <header class="card-header">
+        <span class="icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <h1 id="form-title">Patient Registration</h1>
+      </header>
+
+      <form id="registerForm" novalidate>
+        <!-- Profile picture -->
+        <div class="photo-box">
+          <div class="avatar" id="avatar">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="photo-title">Profile Picture</p>
+            <label for="photo" class="link-btn">Upload photo (optional)</label>
+            <input type="file" id="photo" accept="image/png,image/jpeg,image/webp" hidden />
+            <p class="error" data-error-for="photo"></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="fullName">Full Name<span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="Alex Thompson" autocomplete="name" />
+            <p class="error" data-error-for="fullName"></p>
+          </div>
+          <div class="field">
+            <label for="username">Username<span class="req">*</span></label>
+            <input type="text" id="username" name="username" placeholder="alexthompson" autocomplete="username" />
+            <p class="error" data-error-for="username"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address<span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="alex@email.com" autocomplete="email" />
+          <p class="error" data-error-for="email"></p>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="password">Password<span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="eye" data-toggle="password" aria-label="Show password">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
+            </div>
+            <p class="error" data-error-for="password"></p>
+          </div>
+          <div class="field">
+            <label for="confirmPassword">Confirm Password<span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="eye" data-toggle="confirmPassword" aria-label="Show password">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
+            </div>
+            <p class="error" data-error-for="confirmPassword"></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="phone">Phone Number<span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+            <p class="error" data-error-for="phone"></p>
+          </div>
+          <div class="field">
+            <label for="dob">Date of Birth<span class="req">*</span></label>
+            <input type="date" id="dob" name="dob" autocomplete="bday" />
+            <p class="error" data-error-for="dob"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="nid">NID Number<span class="req">*</span></label>
+          <input type="text" id="nid" name="nid" placeholder="National ID number" inputmode="numeric" />
+          <p class="error" data-error-for="nid"></p>
+        </div>
+
+        <!-- Phone verification -->
+        <div class="otp-box">
+          <p class="otp-title">Phone Verification</p>
+          <div class="otp-row">
+            <input type="text" id="otp" name="otp" placeholder="Enter 4-digit OTP" inputmode="numeric" maxlength="4" autocomplete="one-time-code" />
+            <button type="button" id="sendOtp" class="btn-secondary">Send OTP</button>
+          </div>
+          <p class="error" data-error-for="otp"></p>
+          <p class="hint" id="otpHint" aria-live="polite"></p>
+        </div>
+
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+
+        <button type="submit" id="submitBtn" class="btn-primary">Create Patient Account</button>
+      </form>
+
+      <p class="signin">Already have an account? <a href="login.html">Sign in</a></p>
+    </section>
+  </main>
+
+  <script src="Patient_registration.js"></script>
+</body>
+</html>

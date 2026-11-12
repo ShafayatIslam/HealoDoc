@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in | Virtual Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Patient_Login.css" />
+</head>
+<body>
+  <div class="split">
+
+    <!-- ============ LEFT: BRAND PANEL ============ -->
+    <aside class="brand-panel" aria-label="About Virtual Hospital">
+      <a class="back" href="../index.html">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to home
+      </a>
+
+      <div class="brand-body">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 12h4l2-5 4 10 2-5h6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="brand-name">Virtual Hospital</span>
+        </div>
+
+        <h2>Welcome back to your health hub.</h2>
+        <p class="sub">Access your appointments, prescriptions, and health records — all in one secure place.</p>
+
+        <ul class="points">
+          <li>
+            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10"><path d="M5 12l5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><strong>Secure &amp; private</strong><small>Your health data is encrypted end-to-end.</small></div>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10"><path d="M5 12l5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><strong>Always available</strong><small>Book and manage appointments anytime.</small></div>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10"><path d="M5 12l5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><strong>Trusted doctors</strong><small>Every specialist is verified by our team.</small></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Put your photo at assets/doctor.jpg. If it is missing, the gradient shows instead. -->
+      <div class="photo" aria-hidden="true">
+        <img src="assets/doctor.jpg" alt="" onerror="this.remove()" />
+      </div>
+    </aside>
+
+    <!-- ============ RIGHT: FORM ============ -->
+    <main class="form-side">
+      <div class="form-wrap">
+        <div class="brand brand-mobile">
+          <span class="logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 12h4l2-5 4 10 2-5h6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="brand-name">Virtual <b>Hospital</b></span>
+        </div>
+
+        <h1>Sign in</h1>
+        <p class="welcome">Welcome back — let's get you to your dashboard.</p>
+
+        <form id="loginForm" novalidate>
+          <fieldset class="roles">
+            <legend>Sign in as</legend>
+            <div class="role-row">
+              <button type="button" class="role active" data-role="patient" aria-pressed="true">Patient</button>
+              <button type="button" class="role" data-role="doctor" aria-pressed="false">Doctor</button>
+              <button type="button" class="role" data-role="admin" aria-pressed="false">Admin</button>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="email">Email address<span class="req">*</span></label>
+            <div class="input-wrap">
+              <svg class="lead-icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="username" class="has-lead" />
+            </div>
+            <p class="error" data-error-for="email"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password<span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" class="has-eye" />
+              <button type="button" class="eye" id="togglePw" aria-label="Show password">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
+            </div>
+            <p class="error" data-error-for="password"></p>
+            <a class="forgot" href="forgot-password.html">Forgot password?</a>
+          </div>
+
+          <p class="alert" id="formAlert" role="alert" hidden></p>
+
+          <button type="submit" class="btn-primary" id="submitBtn">Sign in to Patient Dashboard</button>
+        </form>
+
+        <p class="create">Don't have an account? <a href="../patient-registration/index.html">Create one</a></p>
+
+        <!-- Demo only: hidden automatically when DEMO_MODE is false in script.js -->
+        <section class="demo" id="demoSection" aria-label="Quick demo access">
+          <p class="demo-title">Quick demo access</p>
+          <div class="demo-row">
+            <button type="button" class="demo-btn demo-patient" data-demo="patient">Patient Demo</button>
+            <button type="button" class="demo-btn demo-doctor" data-demo="doctor">Doctor Demo</button>
+            <button type="button" class="demo-btn demo-admin" data-demo="admin">Admin Demo</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="Patient_Login.js"></script>
+</body>
+</html>
