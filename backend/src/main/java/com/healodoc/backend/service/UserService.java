@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
@@ -22,9 +23,10 @@ public class UserService {
     final private UserRepository userRepo;
     final private PatientRepository patientRepo;
     final private PasswordEncoder passwordEncoder;
+    final private FileStorageService fileStorageService;
 
     @Transactional
-    public void registerPatient(PatientRequest request){
+    public void registerPatient(PatientRequest request) throws IOException {
         if(userRepo.existsByUsername(request.getUsername()))
             throw new ResponseStatusException(HttpStatus.CONFLICT, request.getUsername() + " already exist!");
         if(patientRepo.existsByEmail(request.getEmail()))
@@ -38,6 +40,12 @@ public class UserService {
         patient.setUser(savedUser);
         patient.setRegDate(LocalDate.now());
         patientRepo.save(patient);
+
+        if(request.getPhoto() != null && !request.getPhoto().isEmpty()){
+            String fileName = fileStorageService.savePhoto(savedUser.getId(), patient.getFullname(), request.getPhoto(), "patient-photos");
+            patient.setPhoto(fileName);
+            patientRepo.save(patient);
+        }
     }
 
 }
