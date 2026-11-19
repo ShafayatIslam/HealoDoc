@@ -1,6 +1,8 @@
 package com.healodoc.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -35,6 +37,8 @@ public class Patient {
     @Column(nullable = false)
     private LocalDate regDate;
 
+    @Email
+    @NotBlank
     @Column(nullable = false, unique = true, length = 255)
     private String email;
 
