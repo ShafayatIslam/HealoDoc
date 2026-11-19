@@ -2,10 +2,12 @@ package com.healodoc.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -28,4 +30,10 @@ public class User {
             orphanRemoval = true
     )
     private Patient patient;
+
+    public User(String username, String password, Role role){
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }
