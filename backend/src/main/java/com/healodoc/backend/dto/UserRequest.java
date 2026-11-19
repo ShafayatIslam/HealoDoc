@@ -10,7 +10,7 @@ public class UserRequest {
     private String password;
     private Role role;
 
-    public static User fromUserRequest(UserRequest request){
+    public static User toUser(UserRequest request){
         User u = new User(request.username, request.password, request.role);
         return u;
     }
