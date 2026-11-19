@@ -9,6 +9,7 @@ import com.healodoc.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +21,7 @@ public class UserService {
 
     final private UserRepository userRepo;
     final private PatientRepository patientRepo;
+    final private PasswordEncoder passwordEncoder;
 
     @Transactional
     public void registerPatient(PatientRequest request){
@@ -29,6 +31,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, request.getEmail() + " already exists!");
 
         User user = PatientRequest.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         User savedUser = userRepo.save(user);
 
         Patient patient = PatientRequest.toPatient(request);
