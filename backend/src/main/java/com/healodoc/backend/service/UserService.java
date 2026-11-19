@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -31,6 +33,7 @@ public class UserService {
 
         Patient patient = PatientRequest.toPatient(request);
         patient.setUser(savedUser);
+        patient.setRegDate(LocalDate.now());
         patientRepo.save(patient);
     }
 
