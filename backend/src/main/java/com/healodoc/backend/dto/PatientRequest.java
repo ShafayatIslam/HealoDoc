@@ -3,6 +3,7 @@ package com.healodoc.backend.dto;
 import com.healodoc.backend.model.Gender;
 import com.healodoc.backend.model.Patient;
 import com.healodoc.backend.model.Role;
+import com.healodoc.backend.model.User;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,10 @@ public class PatientRequest {
     private Gender gender;
     private String email;
     private MultipartFile photo;
+
+    public static User toUser(PatientRequest request){
+        return new User(request.username, request.password, request.role);
+    }
 
     public static Patient toPatient(PatientRequest request){
         Patient p = new Patient();

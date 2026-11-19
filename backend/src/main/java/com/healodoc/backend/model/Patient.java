@@ -42,5 +42,6 @@ public class Patient {
     @Column(nullable = false, unique = true, length = 255)
     private String email;
 
+    @Column(nullable = true)
     private String photo;
 }
