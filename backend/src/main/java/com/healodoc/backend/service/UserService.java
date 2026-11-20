@@ -2,6 +2,7 @@ package com.healodoc.backend.service;
 
 import com.healodoc.backend.dto.PatientRequest;
 import com.healodoc.backend.dto.UserRequest;
+import com.healodoc.backend.dto.UserResponse;
 import com.healodoc.backend.model.Patient;
 import com.healodoc.backend.model.User;
 import com.healodoc.backend.repository.PatientRepository;
@@ -46,6 +47,16 @@ public class UserService {
             patient.setPhoto(fileName);
             patientRepo.save(patient);
         }
+    }
+
+    public UserResponse login(UserRequest request){
+        User user = userRepo.findByUsername(request.getUsername());
+        if(user == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Not Found With Username: "+request.getUsername());
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword()))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect Password!");
+
+        return UserResponse.fromUser(user);
     }
 
 }
