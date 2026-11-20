@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -49,5 +50,11 @@ public class PatientController {
     public ResponseEntity<String> updatePatientDetails(@PathVariable Long id, @RequestBody PatientRequest request){
         patientService.updatePatientDetails(id, request);
         return ResponseEntity.ok("Profile Updated Successfully.");
+    }
+
+    @PutMapping("/{id}/photo")
+    public ResponseEntity<String> updatePatientPhoto(@PathVariable Long id, @RequestBody MultipartFile photo) throws IOException {
+        patientService.updatePhoto(id, photo);
+        return ResponseEntity.ok("Photo Updated Successfully.");
     }
 }
