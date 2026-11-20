@@ -44,4 +44,10 @@ public class PatientController {
                 .contentType(contentType)
                 .body(photo);
     }
+
+    @PutMapping("/details/{id}")
+    public ResponseEntity<String> updatePatientDetails(@PathVariable Long id, @RequestBody PatientRequest request){
+        patientService.updatePatientDetails(id, request);
+        return ResponseEntity.ok("Profile Updated Successfully.");
+    }
 }

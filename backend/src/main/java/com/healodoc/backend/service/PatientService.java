@@ -39,7 +39,7 @@ public class PatientService {
         return fileStorageService.loadPhoto("patient-photos", patient.getPhoto());
     }
 
-    public void updatePatientDetails(Long id, PatientRequest request) throws IOException {
+    public void updatePatientDetails(Long id, PatientRequest request){
         Patient p = patientRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Not Found!"));
         p.setFullname(request.getFullname());
         p.setDateOfBirth(request.getDateOfBirth());
