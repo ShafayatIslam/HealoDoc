@@ -15,8 +15,16 @@ public class PatientService {
 
     public PatientResponse getPatientDetails(Long id){
         Patient p = patientRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!"));
-        return PatientResponse.fromPatient(p);
+
+        String photoUrl = null;
+        if(p.getPhoto() != null){
+            photoUrl = "/" + p.getId() + "/photo";
+        }
+
+        PatientResponse response = PatientResponse.fromPatient(p);
+        response.setPhotoUrl(photoUrl);
+        return response;
     }
 
-    
+
 }
