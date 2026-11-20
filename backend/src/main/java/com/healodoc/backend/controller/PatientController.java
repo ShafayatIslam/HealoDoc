@@ -1,6 +1,8 @@
 package com.healodoc.backend.controller;
 
 import com.healodoc.backend.dto.PatientRequest;
+import com.healodoc.backend.dto.PatientResponse;
+import com.healodoc.backend.service.PatientService;
 import com.healodoc.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,10 +17,16 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class PatientController {
     final private UserService userService;
+    final private PatientService patientService;
 
     @PostMapping(value = "/registration", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> registerPatient(@ModelAttribute PatientRequest request) throws IOException {
         userService.registerPatient(request);
         return ResponseEntity.ok("Registration Successful.");
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<PatientResponse> getPatientDetails(@PathVariable Long id){
+        return ResponseEntity.ok(patientService.getPatientDetails(id));
     }
 }
