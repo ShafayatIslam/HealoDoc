@@ -46,4 +46,9 @@ public class FileStorageService {
 
         throw new FileNotFoundException("Photo not found!");
     }
+
+    public void deletePhoto(String dir, String filename) throws IOException {
+        Path filePath = uploadDir.resolve(dir).resolve(filename).normalize();
+        Files.deleteIfExists(filePath);
+    }
 }
