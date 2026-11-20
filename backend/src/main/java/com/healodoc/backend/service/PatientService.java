@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
@@ -45,6 +46,22 @@ public class PatientService {
         p.setDateOfBirth(request.getDateOfBirth());
         p.setBloodGroup(request.getBloodGroup());
         p.setGender(request.getGender());
+        patientRepo.save(p);
+    }
+
+    public void updatePhoto(Long id, MultipartFile photo) throws IOException {
+        Patient p = patientRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Not Found!"));
+
+        String filename = null;
+        if(photo != null && !photo.isEmpty()) {
+            if(p.getPhoto() != null && !p.getPhoto().isBlank()){
+                fileStorageService.deletePhoto("patient-photos", p.getPhoto());
+                filename = fileStorageService.savePhoto(p.getId(), p.getPhoto(), photo, "patient-photos");
+            }
+            else
+                filename = fileStorageService.savePhoto(p.getId(), p.getPhoto(), photo, "patient-photos");
+        }
+        p.setPhoto(filename);
         patientRepo.save(p);
     }
 }
