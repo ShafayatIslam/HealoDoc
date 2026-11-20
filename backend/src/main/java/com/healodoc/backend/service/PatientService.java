@@ -56,10 +56,10 @@ public class PatientService {
         if(photo != null && !photo.isEmpty()) {
             if(p.getPhoto() != null && !p.getPhoto().isBlank()){
                 fileStorageService.deletePhoto("patient-photos", p.getPhoto());
-                filename = fileStorageService.savePhoto(p.getId(), p.getPhoto(), photo, "patient-photos");
+                filename = fileStorageService.savePhoto(p.getId(), p.getFullname(), photo, "patient-photos");
             }
             else
-                filename = fileStorageService.savePhoto(p.getId(), p.getPhoto(), photo, "patient-photos");
+                filename = fileStorageService.savePhoto(p.getId(), p.getFullname(), photo, "patient-photos");
         }
         p.setPhoto(filename);
         patientRepo.save(p);
