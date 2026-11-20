@@ -1,5 +1,6 @@
 package com.healodoc.backend.service;
 
+import com.healodoc.backend.dto.PatientRequest;
 import com.healodoc.backend.dto.PatientResponse;
 import com.healodoc.backend.model.Patient;
 import com.healodoc.backend.repository.PatientRepository;
@@ -38,4 +39,12 @@ public class PatientService {
         return fileStorageService.loadPhoto("patient-photos", patient.getPhoto());
     }
 
+    public void updatePatientDetails(Long id, PatientRequest request) throws IOException {
+        Patient p = patientRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Not Found!"));
+        p.setFullname(request.getFullname());
+        p.setDateOfBirth(request.getDateOfBirth());
+        p.setBloodGroup(request.getBloodGroup());
+        p.setGender(request.getGender());
+        patientRepo.save(p);
+    }
 }
